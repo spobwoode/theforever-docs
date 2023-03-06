@@ -1,0 +1,56 @@
+import BtnApproveContract from "../components/BtnApproveContract.tsx";
+import BtnBatchTransfer from "../components/BtnBatchTransfer"
+import InputSelectBatchTransferMethod from "../components/InputSelectBatchTransferMethod"
+import InputRawData from "../components/InputRawData"
+import {BatchTransferProvider} from "../contexts/BatchTransferContext"
+import InputContractAddress from "../components/InputContractAddress"
+
+# Gas-efficient Batch NFT Transfer
+
+This tool allows you to transfer multiple ERC721 NFTs in a single transaction. It's more gas-efficient than transferring each NFT individually, and it's also more convenient than having to send multiple transactions.
+
+Don't take my word for it, you can [verify the contract's source code for yourself on Etherscan](https://etherscan.io/address/0x7Ee128B2DacA0D2f4e61bE49d668AE82964E65F8#code). Feel free to deploy your own version, or use the one already deployed to the Ethereum mainnet. There are no fees to use this contract other than the (optimised) gas fees.
+
+## 1. Paste your ERC721 contract address:
+
+Enter the address of the ERC721 contract you want to transfer tokens from. For example, the address of the Doodles contract is ```0x8a90cab2b38dba80c64b7734e58ee1db38b8992e```.
+
+<InputContractAddress />
+
+## 2. Approve the contract
+This will call ```setApproveAll``` on the ERC721 contract, authorizing the batch transfer contract to transfer tokens on your behalf.
+
+<BtnApproveContract />
+
+## 3. Submit your list of addresses and token_ids
+
+This should be a comma-separated list of addresses and token_ids, each on a new line. 
+
+If you need to transfer a large number, I found that the optimal maximum number of tokens to batch transfer in one transaction is about 200. It's possible to do more, but you'll likely end up paying more gas overall.
+
+Example input:
+
+```
+0xD06D855652A73E61Bfe26A3427Dfe51f3b827fe3,1
+0xD06D855652A73E61Bfe26A3427Dfe51f3b827fe3,2
+```
+
+<InputRawData />
+
+## 4. Choose your method
+
+The ```safeTransferFrom``` function in an ERC721 contract provides an extra level of security compared to the ```transferFrom``` function by including checks to ensure that the receiver is capable of receiving the token and that any on-chain hooks or callbacks are executed correctly. Although safeTransferFrom typically requires more gas, the added security reduces the risk of lost or stuck tokens.
+
+<InputSelectBatchTransferMethod />
+
+## 5. Run the transaction
+
+Click the button below to run the transaction. You will be prompted to sign the transaction in your wallet.
+
+<BtnBatchTransfer />
+
+## 6. Party? 🥳
+
+If you found this tool at all helpful, please consider sending me an NFT for my collection 🙏 weiz.eth
+
+export default ({ children }) => <BatchTransferProvider>{children}</BatchTransferProvider>
