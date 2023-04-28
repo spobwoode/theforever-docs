@@ -22,7 +22,7 @@
     "@thirdweb-dev/sdk": "^3.9.1",
     "@web3-react/core": "^8.2.0",
     "ethers": "^5.7.2",
-    "next": "^13.0.6",
+    "next": "latest",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
