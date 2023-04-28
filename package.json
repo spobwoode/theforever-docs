@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
-    "@thirdweb-dev/react": "^3.9.1",
+    "@thirdweb-dev/react": "^3.9.5",
     "@thirdweb-dev/sdk": "^3.9.1",
     "ethers": "^5.7.2",
     "next": "^13.0.6",
