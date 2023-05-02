@@ -1,4 +1,4 @@
-import { Web3Button } from '@thirdweb-dev/react'
+import { useContractWrite, useContract, Web3Button } from '@thirdweb-dev/react'
 import React from 'react'
 import { useAddress } from "@thirdweb-dev/react"
 import { useBatchTransfer } from '../contexts/BatchTransferContext'
@@ -6,6 +6,11 @@ import { ethers } from 'ethers'
 
 export default function BtnApproveContract() {
     const {contractAddress, isApproved, setIsApproved} = useBatchTransfer()
+    const { contract } = useContract(contractAddress);
+    const { mutateAsync, isLoading, error } = useContractWrite(
+        contract,
+        "setApprovalForAll",
+    );
     const address = useAddress()
     const mainnetBatchTransferContractAddress = "0x7Ee128B2DacA0D2f4e61bE49d668AE82964E65F8"
 
@@ -31,13 +36,16 @@ export default function BtnApproveContract() {
                         contractAbi={[
                             { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }
                         ]}
-                        action={async (contract) => {
-                            //console.log(contract)
-                            const ethersContract = new ethers.Contract(contractAddress, [
-                                { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }
-                            ])
-                            await ethersContract.setApprovalForAll(mainnetBatchTransferContractAddress, true)
-                        }}
+                        // action={async (contract) => {
+                        //     //console.log(contract)
+
+                        //     // const ethersContract = new ethers.Contract(contractAddress, [
+                        //     //     { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }
+                        //     // ])
+                        //     // await ethersContract.setApprovalForAll(mainnetBatchTransferContractAddress, true)
+                            
+                        // }}
+                            action={() => mutateAsync([mainnetBatchTransferContractAddress, true])}
                         onSuccess={() => console.log('success')}
                         onError={(err) => console.log(err)}
                     >
