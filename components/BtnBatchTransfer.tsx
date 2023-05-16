@@ -1,6 +1,7 @@
 import { Web3Button } from '@thirdweb-dev/react'
 import React from 'react'
 import { useBatchTransfer } from '../contexts/BatchTransferContext'
+import { Callout } from 'nextra-theme-docs'
 
 export default function BtnBatchTransfer() {
     const [recipients, setRecipients] = React.useState<string[]>([])
@@ -11,6 +12,7 @@ export default function BtnBatchTransfer() {
         setRawInput,
         contractAddress,
     } = useBatchTransfer()
+    const [functionError, setFunctionError] = React.useState<string>('')
 
     React.useEffect(() => {
         const lines = raw_input.split('\n')
@@ -26,11 +28,23 @@ export default function BtnBatchTransfer() {
     }, [raw_input])
 
     return (
-        <>            
+        <>   
+            { functionError &&
+                <Callout type="error" emoji="️🚫">
+                    {functionError}
+                </Callout>
+            }         
             <Web3Button
                 contractAddress={"0x7Ee128B2DacA0D2f4e61bE49d668AE82964E65F8"}
                 action={(contract) => {
-                    contract.call(functionName, contractAddress, recipients, tokenIds)
+                    try {
+                        contract.call(functionName, contractAddress, recipients, tokenIds).catch((error) => {
+                            //console.log(error)
+                            setFunctionError(error.message)
+                        })
+                    } catch (error) {
+                        console.log(error)
+                    }
                 }}
             >
                 batchTransfer

@@ -13,6 +13,11 @@ const config: DocsThemeConfig = {
   footer: {
       text: '© theforever.io',
   },
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – TheForever by WeiZ'
+    }
+  }
 }
 
 export default config
