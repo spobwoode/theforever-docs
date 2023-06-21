@@ -1,0 +1,13 @@
+import { MetadataGeneratorProvider } from '../contexts/MetadataGeneratorContext';
+import MetadataInputs from '../components/metadata_generator/MetadataInputs';
+import BtnGenerate from '../components/metadata_generator/BtnGenerate';
+
+# Metadata Generator
+
+This tool allows you to quickly generate a large number of metadata files for your ERC721 collection. Once generated, you can upload to your file storage service of choice.
+
+<MetadataInputs />
+
+<BtnGenerate />
+
+export default ({ children }) => <MetadataGeneratorProvider>{children}</MetadataGeneratorProvider>

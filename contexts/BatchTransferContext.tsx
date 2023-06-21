@@ -29,7 +29,6 @@ export function BatchTransferProvider({ children }) {
     const [functionName, setFunctionName] = useState("batchTransfer")
     const [raw_input, setRawInput] = useState("")
 
-
     return (
         <BatchTransferContext.Provider value={{
             contractAddress,
