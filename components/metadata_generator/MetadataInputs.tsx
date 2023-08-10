@@ -1,41 +1,7 @@
 import React from 'react'
 import { useMetadataGenerator } from '../../contexts/MetadataGeneratorContext'
-
-const TextInputField = ({ label, value, setValue }) => {
-    return (
-        <div className="flex flex-col mb-4">
-            <label htmlFor={label} className="text-sm mb-2">{label}</label>
-            <input
-                type="text"
-                name={label}
-                id={label}
-                placeholder={label}
-                onChange={(e) => setValue(e.target.value)}
-                value={value}
-                className="border border-gray-300 rounded-md p-2"
-                autoComplete='off'
-            />
-        </div>
-    )
-}
-
-const NumberInputField = ({ label, value, setValue }) => {
-    return (
-        <div className="flex flex-col mb-4">
-            <label htmlFor={label} className="text-sm mb-2">{label}</label>
-            <input
-                type="number"
-                name={label}
-                id={label}
-                placeholder={label}
-                onChange={(e) => setValue(e.target.value)}
-                value={value}
-                className="border border-gray-300 rounded-md p-2"
-                autoComplete='off'
-            />
-        </div>
-    )
-}
+import TextInputField from '../TextInputField'
+import NumberInputField from '../NumberInputField'
 
 export default function MetadataInputs() {
     const {

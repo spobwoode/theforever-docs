@@ -1,0 +1,22 @@
+import { MetadataToCSVProvider } from '../contexts/MetadataToCSVContext';
+import MetadataUrlInput from '../components/metadata_to_csv/MetadataUrlInput';
+import BtnGenerateCSV from '../components/metadata_to_csv/BtnGenerateCSV';
+
+# Metadata to CSV file
+
+This tool will extract metadata from a given directory and write it to a CSV file. This can help when you're trying to visualise all of the traits and other fields across an entire NFT collection.
+
+## Step 1: Enter the URL of the directory containing the metadata files
+
+If this is an IPFS directory then use a gateway URL like `https://ipfs.io/ipfs/Qm...` or `https://cloudflare-ipfs.com/ipfs/Qm...`
+
+The Metadata URL should be in this format: `https://ipfs.io/ipfs/Qm.../{id}.json`. The `{id}` will be replaced with the token ID of each NFT in the collection.
+<br />
+
+<MetadataUrlInput />
+
+## Step 2: Generate and download the CSV file
+
+<BtnGenerateCSV />
+
+export default ({ children }) => <MetadataToCSVProvider>{children}</MetadataToCSVProvider>
