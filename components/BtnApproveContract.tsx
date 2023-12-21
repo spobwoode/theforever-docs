@@ -45,8 +45,7 @@ export default function BtnApproveContract() {
                         //     // await ethersContract.setApprovalForAll(mainnetBatchTransferContractAddress, true)
                             
                         // }}
-                            action={() => mutateAsync([mainnetBatchTransferContractAddress, true])}
-                        onSuccess={() => console.log('success')}
+                        action={() => mutateAsync({ args: [mainnetBatchTransferContractAddress, true] })}                        onSuccess={() => console.log('success')}
                         onError={(err) => console.log(err)}
                     >
                         Approve
