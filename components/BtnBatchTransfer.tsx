@@ -38,8 +38,7 @@ export default function BtnBatchTransfer() {
                 contractAddress={"0x7Ee128B2DacA0D2f4e61bE49d668AE82964E65F8"}
                 action={(contract) => {
                     try {
-                        contract.call(functionName, contractAddress, recipients, tokenIds).catch((error) => {
-                            //console.log(error)
+                        contract.call(functionName, [contractAddress, recipients, tokenIds]).catch((error) => {
                             setFunctionError(error.message)
                         })
                     } catch (error) {
